@@ -54,11 +54,12 @@ class MultiplicationTable{
         return table;
     }
 }
-//create initial table
+
 const table_form = document.querySelector('form#table-form')
 const email_form = document.querySelector('form#email-form')
 const tableContainer = document.querySelector('.table-container')
 let colMin, colMax, rowMin, rowMax;
+//create initial table
 window.addEventListener('DOMContentLoaded', function() {
     // Only add if there isn't already a table
     if (!document.getElementById('mult-table')) {
@@ -133,13 +134,15 @@ table_form.addEventListener('submit', function(event){
         document.getElementById('row_max').classList.remove('is-invalid')
 
         document.getElementById('email-button').disabled = false;
+        const toast = new bootstrap.Toast(document.getElementById('myToast'));
+toast.show();
     }
 });
-
+// handle email input
 email_form.addEventListener('submit', function(event){
     event.preventDefault();
     const email = document.getElementById('email').value;
-    let url = "https://jyue-automation.onrender.com/webhook-test/6bb140ab-0fce-44e3-8278-4ccd90ad8a32?email="+email+"&cmin="+colMin+"&cmax="+colMax+"&rmin="+rowMin+"&rmax="+rowMax;
+    let url = "https://jyue-automation.onrender.com/webhook/6bb140ab-0fce-44e3-8278-4ccd90ad8a32?email="+email+"&cmin="+colMin+"&cmax="+colMax+"&rmin="+rowMin+"&rmax="+rowMax;
     console.log(url);
     fetch(url);
 });
