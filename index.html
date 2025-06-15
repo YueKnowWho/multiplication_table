@@ -14,16 +14,16 @@ updated by JY on June 14, 2025 at 8 PM
     <link rel="stylesheet" href="css/style.css">
     <title>Multiplication Table</title>
 </head>
-<body>
+<body class = "d-flex flex-column min-vh-100">
     <header>
         <h1 class ="text-center display-5 fw-bold m-5 text-primary">Multiplication Table</h1>
     </header>
-    <div class = "container">
+    <main class = "container">
         <!-- container with form on left and table on right 50/50 splitcontainer with form on left and table on right 50/50 split -->
         <div class = "row">
             <div class = "form-container container mt-5 col-6">
                 <h2 class ="fw-semibold mb-4" >Enter Table Ranges</h2>
-                <form>
+                <form id = "table-form">
                     <div class="col_min mb-3">
                         <label for="col_min" class = "form-label">Minimum column value</label>
                         <input type = "text" class="form-control" id = "col_min" name = "col_min" placeholder = "Enter min column value" required>
@@ -52,15 +52,29 @@ updated by JY on June 14, 2025 at 8 PM
                             Minimum row must be less than or equal to maximum row.
                         </div>
                     </div>
-                        <input type = "submit" value = "Generate Table" class = "btn 
-                        btn-primary">
+                    <input type = "submit" id = "table-button" value = "Generate Table" class = "btn btn-primary">
                 </form>
             </div>
             <div class = "table-container container col-6 mt-5">
                 
-            <div>
+            </div>
         </div>
-    <div>
+        <div class = "row">
+            <div class = "form-container container mt-5 col-6">
+                <h2 class = "fw-semibold mb-4">Email Table</h2>
+                <form id = "email-form">
+                    <div class="mb-3">
+                        <label for="email" class = "form-label">Email</label>
+                        <input type = "email" class="form-control" id = "email" name = "email" placeholder = "Enter email" required>
+                    </div>
+                    <input type = "submit" id = "email-button" value = "Send" class = "btn btn-primary" disabled>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-light text-center py-3 mt-auto">
+        <small>&copy; 2025 Jonathan Yue</small>
+    </footer>
     <script src = "js/mult_table.js"></script>
 </body>
 </html>

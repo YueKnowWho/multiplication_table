@@ -55,8 +55,10 @@ class MultiplicationTable{
     }
 }
 //create initial table
-const form = document.querySelector('form')
+const table_form = document.querySelector('form#table-form')
+const email_form = document.querySelector('form#email-form')
 const tableContainer = document.querySelector('.table-container')
+let colMin, colMax, rowMin, rowMax;
 window.addEventListener('DOMContentLoaded', function() {
     // Only add if there isn't already a table
     if (!document.getElementById('mult-table')) {
@@ -67,15 +69,15 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 });
 //When Generate Table button is clicked
-form.addEventListener('submit', function(event){
+table_form.addEventListener('submit', function(event){
     event.preventDefault(); // prevents page from resetting
     //get form inputs
-    const colMin = parseInt(document.getElementById('col_min').value, 10);
-    const colMax = parseInt(document.getElementById('col_max').value, 10);
-    const rowMin = parseInt(document.getElementById('row_min').value, 10);
-    const rowMax = parseInt(document.getElementById('row_max').value, 10);
+    colMin = parseInt(document.getElementById('col_min').value, 10);
+    colMax = parseInt(document.getElementById('col_max').value, 10);
+    rowMin = parseInt(document.getElementById('row_min').value, 10);
+    rowMax = parseInt(document.getElementById('row_max').value, 10);
     //check for invalid non integer
-    if(!Number.isInteger(colMin) || !Number.isInteger(colMax)||!Number.isInteger(rowMin) || !Number.isInteger(rowMin)){
+    if(!Number.isInteger(colMin) || !Number.isInteger(colMax)||!Number.isInteger(rowMin) || !Number.isInteger(rowMax)){
         if(!Number.isInteger(colMin)){
             document.querySelector('.col_min .invalid-feedback').textContent = "Must be integer input"
             document.getElementById('col_min').classList.add('is-invalid')
@@ -92,6 +94,7 @@ form.addEventListener('submit', function(event){
             document.querySelector('.row_max .invalid-feedback').textContent = "Must be integer input"
             document.getElementById('row_max').classList.add('is-invalid')
         }
+        document.getElementById('email-button').disabled = true;
     }
     //check for valid input min>max
     else if(colMin > colMax || rowMin > rowMax){
@@ -108,6 +111,7 @@ form.addEventListener('submit', function(event){
             document.getElementById('row_min').classList.add('is-invalid')
             document.getElementById('row_max').classList.add('is-invalid')
         }
+        document.getElementById('email-button').disabled = true;
     }
     //valid input
     else{
@@ -127,5 +131,15 @@ form.addEventListener('submit', function(event){
         document.getElementById('col_max').classList.remove('is-invalid')
         document.getElementById('row_min').classList.remove('is-invalid')
         document.getElementById('row_max').classList.remove('is-invalid')
+
+        document.getElementById('email-button').disabled = false;
     }
+});
+
+email_form.addEventListener('submit', function(event){
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    let url = "https://jyue-automation.onrender.com/webhook-test/6bb140ab-0fce-44e3-8278-4ccd90ad8a32?email="+email+"&cmin="+colMin+"&cmax="+colMax+"&rmin="+rowMin+"&rmax="+rowMax;
+    console.log(url);
+    fetch(url);
 });
